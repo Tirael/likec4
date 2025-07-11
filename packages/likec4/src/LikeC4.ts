@@ -203,8 +203,8 @@ ${k.red('Please specify a project folder')}
    * Same as {@link computedModel()}, but also applies layout
    * Ready for rendering
    */
-  async layoutedModel(project?: ProjectId | undefined): Promise<LikeC4Model.Layouted> {
-    const projectId = this.langium.shared.workspace.ProjectsManager.ensureProjectId(project)
+  async layoutedModel(projectId?: ProjectId | undefined): Promise<LikeC4Model.Layouted> {
+    projectId = this.langium.shared.workspace.ProjectsManager.ensureProjectId(projectId)
     const parsed = await this.langium.likec4.ModelBuilder.parseModel(projectId)
     if (!parsed) {
       throw new Error('Failed to parse model')

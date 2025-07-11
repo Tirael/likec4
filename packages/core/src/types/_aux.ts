@@ -26,6 +26,14 @@ export interface SpecAux<
 }
 export type AnySpec = SpecAux<any, any, any, any, any>
 
+export interface ProjectInfo {
+  id: string
+  config: {
+    name: string
+    title?: string | undefined
+  }
+}
+
 /**
  * Auxilary interface to keep inferred types
  *
@@ -42,10 +50,12 @@ export interface Aux<
   Deployment extends string,
   View extends string,
   Project extends string,
+  ProjectData extends ProjectInfo,
   Spec extends SpecAux<string, string, string, string, string>,
 > {
   Stage: Stage
   ProjectId: Project
+  ProjectData: ProjectData
   ElementId: Element
   DeploymentId: Deployment
 
@@ -64,10 +74,10 @@ export interface Aux<
 // export type AnyComputed = AnyOnStage<'computed'>
 // export type AnyLayouted = AnyOnStage<'layouted'>
 
-export type Any = Aux<any, any, any, any, any, SpecAux<any, any, any, any, any>>
+export type Any = Aux<any, any, any, any, any, any, SpecAux<any, any, any, any, any>>
 export type { Any as AnyAux }
 
-export type Never = Aux<never, never, never, never, never, SpecAux<never, never, never, never, never>>
+export type Never = Aux<never, never, never, never, never, any, SpecAux<never, never, never, never, never>>
 
 /**
  * Fallback when {@link Aux} can't be inferred.
@@ -79,6 +89,7 @@ export type Unknown = Aux<
   string,
   string,
   string,
+  ProjectInfo,
   SpecAux<string, string, string, string, string>
 >
 
@@ -88,6 +99,7 @@ export type UnknownParsed = Aux<
   string,
   string,
   string,
+  ProjectInfo,
   SpecAux<string, string, string, string, string>
 >
 
@@ -97,6 +109,7 @@ export type UnknownComputed = Aux<
   string,
   string,
   string,
+  ProjectInfo,
   SpecAux<string, string, string, string, string>
 >
 export type UnknownLayouted = Aux<
@@ -105,6 +118,7 @@ export type UnknownLayouted = Aux<
   string,
   string,
   string,
+  ProjectInfo,
   SpecAux<string, string, string, string, string>
 >
 
@@ -113,7 +127,7 @@ export type UnknownLayouted = Aux<
  */
 export type Stage<A> =
   // dprint-ignore
-  A extends Aux<infer S, any, any, any, any, any>
+  A extends Aux<infer S, any, any, any, any, any, any>
     ? IfNever<S, never, Coalesce<S, ModelStage>>
     : never
 
@@ -128,26 +142,28 @@ export type PickByStage<A extends Any, OnParsed, OnComputed, OnLayouted = OnComp
 
 export type setStage<A, S extends ModelStage> =
   // dprint-ignore
-  A extends Aux<any, infer E, infer D, infer V, infer P, infer Spec>
-      ? Aux<S, E, D, V, P, Spec>
+  A extends Aux<any, infer E, infer D, infer V, infer PID, infer P, infer Spec>
+      ? Aux<S, E, D, V, PID, P, Spec>
       : never
 
-export type toParsed<A> = A extends Aux<any, infer E, infer D, infer V, infer P, infer Spec>
-  ? Aux<'parsed', E, D, V, P, Spec>
+export type toParsed<A> = A extends Aux<any, infer E, infer D, infer V, infer PID, infer P, infer Spec>
+  ? Aux<'parsed', E, D, V, PID, P, Spec>
   : never
 
-export type toComputed<A> = A extends Aux<any, infer E, infer D, infer V, infer P, infer Spec>
-  ? Aux<'computed', E, D, V, P, Spec>
+export type toComputed<A> = A extends Aux<any, infer E, infer D, infer V, infer PID, infer P, infer Spec>
+  ? Aux<'computed', E, D, V, PID, P, Spec>
   : never
 
-export type toLayouted<A> = A extends Aux<any, infer E, infer D, infer V, infer P, infer Spec>
-  ? Aux<'layouted', E, D, V, P, Spec>
+export type toLayouted<A> = A extends Aux<any, infer E, infer D, infer V, infer PID, infer P, infer Spec>
+  ? Aux<'layouted', E, D, V, PID, P, Spec>
   : never
 
 /**
  * Project identifier from Aux
  */
 export type ProjectId<A> = A extends infer T extends Any ? Coalesce<T['ProjectId']> : never
+
+export type Project<A> = A extends infer T extends Any ? T['ProjectData'] : never
 
 /**
  * Element FQN from Aux as branded type
@@ -230,7 +246,7 @@ export type AllKinds<A> = ElementKind<A> | DeploymentKind<A> | RelationKind<A>
 /**
  * Specification from Aux
  */
-export type Spec<A> = A extends Aux<any, any, any, any, any, infer S> ? S : never
+export type Spec<A> = A extends Aux<any, any, any, any, any, any, infer S> ? S : never
 
 export type StrictProjectId<A> = A extends infer T extends Any ? scalar.ProjectId<ProjectId<T>> : never
 

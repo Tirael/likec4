@@ -39,6 +39,7 @@ export type SpecTypesFromDump<J> = J extends SpecificationDump ? aux.SpecAux<
 export type LikeC4ModelDump = {
   [_stage]?: 'computed' | 'layouted'
   projectId?: string
+  project: aux.ProjectInfo
   specification: SpecificationDump
   elements?: {
     [kind: string]: object
@@ -66,7 +67,8 @@ export type AuxFromDump<D> = D extends LikeC4ModelDump ? aux.Aux<
     KeysOf<D['elements']>,
     KeysOf<D['deployments']['elements']>,
     KeysOf<D['views']>,
-    D['projectId'] extends infer P extends string ? P : never,
+    D['projectId'] extends infer PID extends string ? PID : never,
+    D['project'],
     SpecTypesFromDump<D['specification']>
   >
   : aux.Never

@@ -292,6 +292,7 @@ export namespace Types {
       T['DeploymentFqn'],
       T['ViewId'],
       'from-builder',
+      any,
       SpecAux<
         T['ElementKind'],
         T['DeploymentKind'],

@@ -1,4 +1,4 @@
-import { LikeC4Diagram } from '@likec4/diagram'
+import { LikeC4Diagram, useLikeC4Model } from '@likec4/diagram'
 import { useCallbackRef, useDocumentTitle } from '@mantine/hooks'
 import { useNavigate } from '@tanstack/react-router'
 import { NotFound } from '../components/NotFound'
@@ -9,6 +9,7 @@ import { useCurrentDiagram } from '../hooks'
 export function ViewReact() {
   const navigate = useNavigate()
   const view = useCurrentDiagram()
+  const model = useLikeC4Model()
 
   const onNavigateTo = useCallbackRef((viewId: string) => {
     navigate({
@@ -23,8 +24,7 @@ export function ViewReact() {
   })
 
   const title = view ? (view.title ?? view.id) : `View not found`
-  console.log(pageTitle)
-  useDocumentTitle(`${title} - ${pageTitle}`)
+  useDocumentTitle(`${title} - ${model.project.config.title ?? pageTitle}`)
 
   if (!view) {
     return <NotFound />
