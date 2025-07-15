@@ -108,6 +108,7 @@ export class LikeC4Model<A extends Any = aux.Unknown> {
     const {
       _stage: stage = 'layouted',
       projectId = 'unknown',
+      project,
       globals,
       imports,
       deployments,
@@ -119,6 +120,7 @@ export class LikeC4Model<A extends Any = aux.Unknown> {
     return new LikeC4Model({
       [_stage]: stage as 'layouted',
       projectId,
+      project,
       globals: {
         predicates: globals?.predicates ?? {},
         dynamicPredicates: globals?.dynamicPredicates ?? {},

@@ -1,6 +1,8 @@
 import { describe, it } from 'vitest'
-import type { Aux, SpecAux } from './_aux'
+import type { Aux, ProjectInfo, SpecAux } from './_aux'
 import { type Filterable, whereOperatorAsPredicate } from './operators'
+
+type FakeProject = ProjectInfo
 
 type A = Aux<
   'computed',
@@ -8,6 +10,7 @@ type A = Aux<
   string,
   string,
   string,
+  FakeProject,
   SpecAux<
     'a' | 'b',
     'deployment1' | 'deployment2',

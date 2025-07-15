@@ -1,5 +1,6 @@
 import { LikeC4Model } from '@likec4/core/model'
 import type { Aux, LayoutedLikeC4ModelData, SpecAux } from '@likec4/core/types'
+import type { ProjectInfo } from '@likec4/core/types/_aux'
 
 export type UnknownLayouted = Aux<
   'layouted',
@@ -7,6 +8,7 @@ export type UnknownLayouted = Aux<
   string,
   string,
   string,
+  ProjectInfo,
   SpecAux<string, string, string, string, string>
 >
 

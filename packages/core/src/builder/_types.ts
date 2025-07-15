@@ -18,6 +18,7 @@ import type {
   TextSize,
   ThemeColor as Color,
 } from '../types'
+import type { ProjectInfo } from '../types/_aux'
 import type { Builder } from './Builder'
 import type { DeploymentRulesBuilderOp } from './Builder.view-deployment'
 
@@ -292,7 +293,7 @@ export namespace Types {
       T['DeploymentFqn'],
       T['ViewId'],
       'from-builder',
-      any,
+      ProjectInfo,
       SpecAux<
         T['ElementKind'],
         T['DeploymentKind'],

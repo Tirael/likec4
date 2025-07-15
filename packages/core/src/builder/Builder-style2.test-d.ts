@@ -1,6 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
 import { LikeC4Model } from '../model/LikeC4Model'
 import type { Aux, ParsedLikeC4ModelData, SpecAux } from '../types'
+import type { ProjectInfo } from '../types/_aux'
 import { Builder } from './Builder'
 
 test('Builder types - style 2', () => {
@@ -29,6 +30,12 @@ test('Builder types - style 2', () => {
       },
       metadataKeys: ['key1', 'key2', 'key1', 'key3'],
     })
+    .project(({ name, title, _ }) =>
+      _(
+        name('Test project'),
+        title('Test project title'),
+      )
+    )
     .model(({ actor, system, component, relTo }, _) =>
       _(
         actor('alice'),
@@ -171,6 +178,7 @@ test('Builder types - style 2', () => {
         'prod' | 'dev' | 'prod.vm1' | 'prod.vm2' | 'dev.vm1' | 'dev.vm2' | 'dev.api' | 'dev.wrong',
         'view' | 'view-of' | 'deployment',
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',
@@ -191,6 +199,7 @@ test('Builder types - style 2', () => {
         'prod' | 'dev' | 'prod.vm1' | 'prod.vm2' | 'dev.vm1' | 'dev.vm2' | 'dev.api' | 'dev.wrong',
         'view' | 'view-of' | 'deployment',
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',
@@ -224,6 +233,7 @@ test('Builder types - style 2', () => {
         'out' | 'out.bob2',
         never,
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',

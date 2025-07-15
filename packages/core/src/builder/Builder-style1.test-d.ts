@@ -1,6 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
 import type { LikeC4Model } from '../model/LikeC4Model'
 import type { Aux, ParsedLikeC4ModelData, SpecAux } from '../types'
+import type { ProjectInfo } from '../types/_aux'
 import { Builder } from './Builder'
 
 test('Builder types - style 1', () => {
@@ -194,6 +195,7 @@ test('Builder types - style 1', () => {
         'prod' | 'dev' | 'prod.vm1' | 'prod.vm2' | 'dev.vm1' | 'dev.vm2' | 'dev.api' | 'dev.wrong',
         'view' | 'view-of' | 'deployment',
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',
@@ -214,6 +216,7 @@ test('Builder types - style 1', () => {
         'prod' | 'dev' | 'prod.vm1' | 'prod.vm2' | 'dev.vm1' | 'dev.vm2' | 'dev.api' | 'dev.wrong',
         'view' | 'view-of' | 'deployment',
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',
@@ -250,6 +253,7 @@ test('Builder types - style 1', () => {
         'out' | 'out.bob2',
         never,
         'from-builder',
+        ProjectInfo,
         SpecAux<
           'actor' | 'system' | 'component',
           'env' | 'vm',

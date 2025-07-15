@@ -119,6 +119,7 @@ export const $likeC4Diagrams = map<LikeC4DiagramsAtom>(
 const EMPTY: ComputedLikeC4ModelData<aux.Unknown> = {
   _stage: 'computed',
   projectId: 'default',
+  project: { id: 'default' },
   specification: {
     tags: {},
     elements: {},

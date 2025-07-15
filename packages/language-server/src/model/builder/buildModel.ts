@@ -237,11 +237,20 @@ export function buildModelData(project: {
     resolveRulesExtendedViews,
   )
 
+  const projectInfo = {
+    id: project.id,
+    ...(project.config && {
+      config: {
+        name: project.config.name,
+        ...(project.config.title && { title: project.config.title }),
+      },
+    }),
+  }
   return {
     data: {
       [c4._stage]: 'parsed',
       projectId: project.id,
-      project,
+      project: projectInfo,
       specification: {
         tags: c4Specification.tags,
         elements: c4Specification.specs.elements,

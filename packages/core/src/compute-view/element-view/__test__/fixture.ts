@@ -35,6 +35,7 @@ import {
   ModelFqnExpr,
   ModelRelationExpr,
 } from '../../../types'
+import type { ProjectInfo } from '../../../types/_aux'
 import type { Participant } from '../../../types/operators'
 import { withReadableEdges } from '../../utils/with-readable-edges'
 import { computeElementView } from '../compute'
@@ -356,6 +357,7 @@ export const globalStyles = {
 export type FakeRelationIds = (typeof fakeRelations)[number]['id']
 const fakeParsedModel = {
   _stage: 'computed' as const,
+  project: { id: 'test-project', config: { name: 'test-project' } },
   specification: {
     elements: {
       actor: {},
@@ -426,6 +428,7 @@ export type $Aux = Aux<
   never,
   'index',
   never,
+  ProjectInfo,
   SpecAux<
     'actor' | 'system' | 'container' | 'component',
     never,

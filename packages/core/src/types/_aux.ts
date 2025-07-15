@@ -28,8 +28,8 @@ export type AnySpec = SpecAux<any, any, any, any, any>
 
 export interface ProjectInfo {
   id: string
-  config: {
-    name: string
+  config?: {
+    name?: string
     title?: string | undefined
   }
 }
@@ -42,6 +42,7 @@ export interface ProjectInfo {
  * @typeParam Deployment - Literal union of FQNs of deployment elements
  * @typeParam View - Literal union of view identifiers
  * @typeParam Project - Project identifier type
+ * @typeParam ProjectInfo - Project metadata type
  * @typeParam Spec - Specification types (kinds, tags, metadata keys)
  */
 export interface Aux<
