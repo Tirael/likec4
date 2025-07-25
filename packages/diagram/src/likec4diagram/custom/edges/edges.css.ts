@@ -12,8 +12,8 @@ export const controlPointsContainer = css({
 })
 
 export const controlPoint = css({
-  fill: `likec4.relation.stroke`,
-  stroke: `likec4.relation.stroke`,
+  fill: `likec4.relation.stroke.dark`,
+  stroke: `likec4.relation.stroke.dark`,
   fillOpacity: 0.75,
   strokeWidth: 1,
   cursor: 'grab',

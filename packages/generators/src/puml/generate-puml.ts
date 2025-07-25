@@ -218,7 +218,7 @@ export function generatePuml(viewmodel: LikeC4ViewModel<aux.Unknown>) {
   const printEdge = (edge: ComputedEdge): CompositeGeneratorNode => {
     const tech = escapeLabel(edge.technology) || ''
     const label = escapeLabel(edge.label) || ''
-    const color = pumlColor(edge.color, relationshipsColorProvider('lineColor'), '#777777')
+    const color = pumlColor(edge.color, relationshipsColorProvider('lineColorDark'), '#777777')
 
     const colorTag = (color: string) => `<color:${color}>`
 
